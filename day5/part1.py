@@ -4,7 +4,6 @@ input = []
 result = 0
 ranges = []
 ingredients = []
-fresh = []
 
 for line in inputRaw:
     input.append(line.rstrip())
@@ -14,18 +13,16 @@ for line in input:
         ranges.append(line)
     else:
         ingredients.append(line)
+ingredients.pop(0)
 
-for elem in ranges:
-    string = elem.split('-')
-    first = int(string[0])
-    last = int(string[1])
-
-    while first <= last:
-        fresh.append(str(first))
-        first += 1
-
+# Tope de gama
 for elem in ingredients:
-    if elem in fresh:
-        result += 1
+    for ran in ranges:
+        string = ran.split('-')
+        first = int(string[0])
+        last = int(string[1])
+        if int(elem) >= first and int(elem) <= last:
+            result += 1
+            break
 
 print(result)
